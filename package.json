@@ -1,0 +1,24 @@
+{
+  "name": "@example/basics",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^1.1.7",
+    "cheerio": "^1.0.0-rc.12",
+    "memory-cache": "^0.2.0",
+    "moment": "^2.29.4",
+    "moment-duration-format": "^2.3.2"
+  },
+  "devDependencies": {
+    "@astrojs/vercel": "^2.0.0",
+    "@types/memory-cache": "^0.2.2",
+    "@types/moment-duration-format": "^2.2.3"
+  }
+}

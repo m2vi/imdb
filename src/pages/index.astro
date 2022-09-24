@@ -1,0 +1,85 @@
+---
+import { imdbMovies } from '../api/cache';
+import Layout from '../layouts/Layout.astro';
+import moment from 'moment';
+import momentDurationFormatSetup from 'moment-duration-format';
+import Card from '../components/Card.astro';
+
+momentDurationFormatSetup(moment as any);
+
+const movies = await imdbMovies();
+---
+
+<Layout title='Top 250 Movies - IMDb'>
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th>Poster</th>
+          <th>Rank</th>
+          <th>Title</th>
+          <th>Year</th>
+          <th>IMDb Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {movies.data.map((movie) => <Card movie={movie} />)}
+      </tbody>
+    </table>
+    <footer>
+      <div>
+        <span>As of {moment(movies.time).format('YYYY-MM-DD HH:mm:ss')} ({moment(movies.time).fromNow(false)})</span>
+      </div>
+    </footer>
+  </main>
+
+  <style is:global>
+    main {
+      margin: auto;
+      padding: 1em;
+      max-width: 60rem;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0 0.5em;
+      width: 100%;
+
+      color: rgb(255, 255, 255, 0.7);
+    }
+
+    th,
+    td {
+      border-collapse: collapse;
+
+      font-weight: 400;
+      text-align: left;
+    }
+
+    th {
+      padding: 10px 0;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    td {
+      border: none;
+      padding: 0.35em;
+      background-color: #1b1b1e;
+    }
+
+    th:not(:first-child),
+    td:not(:first-child) {
+      padding: 0 1em;
+    }
+
+    footer {
+      padding-top: 1em;
+      text-align: center;
+    }
+
+    footer span {
+      font-size: 0.8em;
+      color: rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</Layout>
